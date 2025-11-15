@@ -2,7 +2,6 @@ import showToastError from "../../services/toastService";
 import { useId } from "react";
 import { Formik, Form, Field } from "formik";
 import type { FormikHelpers } from "formik";
-// import * as Yup from "yup";
 import styles from "./SearchBar.module.css";
 
 interface SearchFormValues {
@@ -32,16 +31,6 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
     onSubmit(query);
     actions.resetForm();
   };
-
-  // function handleSubmit(formData: FormData) {
-  //   const query = formData.get("query") as string;
-  //   if (query === "") {
-  //     showToastError("Please enter your search query.");
-  //     return;
-  //   }
-
-  //   onSubmit(query);
-  // }
 
   return (
     <header className={styles.header}>
