@@ -1,4 +1,3 @@
-// import { useState } from "";
 import { fetchMovies } from "../../services/movieService";
 import { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
@@ -10,8 +9,9 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieModal from "../MovieModal/MovieModal";
 import ReactPaginate from "react-paginate";
-import css from "./App.module.css";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import showToastError from "../../services/toastService";
+import css from "./App.module.css";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
@@ -26,6 +26,8 @@ function App() {
   });
 
   const totalPages = data?.total_pages ?? 0;
+  if (data?.results.length === 0)
+    showToastError("No movies found for your request.");
 
   const handleSearch = async (newQuery: string) => {
     setQuery(newQuery);
